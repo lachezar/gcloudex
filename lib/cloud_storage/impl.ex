@@ -7,7 +7,8 @@ defmodule GCloudex.CloudStorage.Impl do
     quote do 
       use GCloudex.CloudStorage.Request
 
-      @endpoint "storage.googleapis.com"
+      # @endpoint "storage.googleapis.com"
+      @endpoint "googleapis.com/storage/v1/b/"
       @project  GCloudex.get_project_id
 
       ###################
