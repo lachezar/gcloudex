@@ -274,7 +274,7 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec get_object(bucket :: binary, object :: binary) :: HTTPResponse.t
       def get_object(bucket, object) do
-        request_query :get, bucket, [], "", object
+        request_query :get, bucket, [], "", concat_uri_fragments(object, "")
       end
 
       @doc"""
@@ -307,7 +307,7 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec get_object_metadata(bucket :: binary, object :: binary) :: HTTPResponse.t
       def get_object_metadata(bucket, object) do
-        request_query :head, bucket, [], "", object
+        request_query :head, bucket, [], "", concat_uri_fragments(object, "")
       end
 
       @doc"""
@@ -332,19 +332,21 @@ defmodule GCloudex.CloudStorage.Impl do
 
         put_object "somebucket",
                    "/home/user/Documents/this_file",
-                   "new_folder/some_other_folder/this_file"
+                   "new_folder/some_other_folder/this_file",
+                   "application/octet-stream"
 
         => # This will upload the file to the directory in 'bucket_path' and
              will create the directories if they do not exist.
       """
-      @spec put_object(bucket :: binary, filepath :: binary, bucket_path :: binary) :: HTTPResponse.t
-      def put_object(bucket, filepath, bucket_path \\ :empty) do
-        body = {:file, filepath}
+      @spec put_object(bucket :: binary, filepath :: binary, bucket_path :: binary, content_type :: binary) :: HTTPResponse.t
+      def put_object(bucket, filepath, bucket_path, content_type) do
+        body = {:multipart, [
+          {"name", "", [{"Content-Type", "application/json"}]}, # <-- MAGIC - don't ask why
+          {:file, filepath, {"form-data", []}, [{"Content-Type", content_type}]}
+        ]}
+        params = build_query_params([{"uploadType", "multipart"}, {"name", bucket_path}])
 
-        case bucket_path do
-          :empty -> request_query :put, bucket, [], body, filepath
-          _      -> request_query :put, bucket, [], body, bucket_path
-        end
+        multipart_request_query :post, bucket, [], body, concat_uri_fragments("", params)
       end
 
       @doc"""
@@ -387,7 +389,7 @@ defmodule GCloudex.CloudStorage.Impl do
       end
 
       defp concat_uri_fragments(object, params) do
-        URI.encode_www_form(object) <> "?" <> params
+        (URI.encode_www_form(object) |> String.replace("+", "%20")) <> "?" <> params
       end
     end
   end

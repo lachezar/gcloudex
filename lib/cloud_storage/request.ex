@@ -11,6 +11,7 @@ defmodule GCloudex.CloudStorage.Request do
     quote do
 
       @endpoint "https://www.googleapis.com/storage/v1/b/"
+      @upload_endpoint "https://www.googleapis.com/upload/storage/v1/b/"
       @project_id GCloudex.get_project_id
 
       @doc"""
@@ -36,24 +37,25 @@ defmodule GCloudex.CloudStorage.Request do
       """
       @spec request(atom, binary, list(tuple), binary) :: HTTPResponse.t
       def request(verb, bucket, headers \\ [], body \\ "") do
-        HTTP.request(
-          verb,
-          @endpoint <> bucket <> "/o",
-          body,
-          headers ++ [{"Authorization",
-                       "Bearer #{Auth.get_token_storage(:full_control)}"}],
-          []
-        )
+        request_query(verb, bucket, headers, body, "", @endpoint)
+      end
+
+      @doc"""
+      Sends a multipart HTTP request with the specified query parameters.
+      """
+      @spec multipart_request_query(atom, binary, list(tuple), binary, binary) :: HTTPResponse.t
+      def multipart_request_query(verb, bucket, headers \\ [], body \\ "", parameters) do
+        request_query(verb, bucket, headers, body, parameters, @upload_endpoint)
       end
 
       @doc"""
       Sends an HTTP request with the specified query parameters.
       """
-      @spec request_query(atom, binary, list(tuple), binary, binary) :: HTTPResponse.t
-      def request_query(verb, bucket, headers \\ [], body \\ "", parameters) do
+      @spec request_query(atom, binary, list(tuple), binary, binary, binary) :: HTTPResponse.t
+      def request_query(verb, bucket, headers \\ [], body \\ "", parameters, endpoint \\ @endpoint) do
         HTTP.request(
           verb,
-          @endpoint <> bucket <> "/o/" <> parameters,
+          endpoint <> bucket <> "/o/" <> parameters,
           body,
           headers ++ [{"Authorization",
                        "Bearer #{Auth.get_token_storage(:full_control)}"}],
