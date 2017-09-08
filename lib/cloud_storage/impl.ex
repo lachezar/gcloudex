@@ -20,7 +20,7 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec list_buckets() :: HTTPResponse.t
       def list_buckets do
-        request_service
+        request_service()
       end
 
       #####################
@@ -55,7 +55,7 @@ defmodule GCloudex.CloudStorage.Impl do
       @spec list_objects(bucket :: binary, query_params :: [{binary, binary}]) :: HTTPResponse.t
       def list_objects(bucket, query_params) do
         request_query :get, bucket, [], "",
-          "?" <> parse_query_params(query_params, "")
+          "?" <> build_query_params(query_params)
       end
 
       @doc"""
@@ -261,7 +261,7 @@ defmodule GCloudex.CloudStorage.Impl do
       @spec delete_object(bucket :: binary, object :: binary, query_params :: [{binary, binary}]) :: HTTPResponse.t
       def delete_object(bucket, object, query_params) do
         request_query :delete, bucket, [], "",
-          object <> "?" <> parse_query_params(query_params, "")
+          concat_uri_fragments(object, build_query_params(query_params))
       end
 
       ##################
@@ -286,7 +286,7 @@ defmodule GCloudex.CloudStorage.Impl do
       @spec get_object(bucket :: binary, object :: binary, query_params :: [{binary, binary}]) :: HTTPResponse.t
       def get_object(bucket, object, query_params) do
         request_query :get, bucket, [], "",
-          object <> "?" <> parse_query_params(query_params, "")
+          concat_uri_fragments(object, build_query_params(query_params))
       end
 
       @doc"""
@@ -295,7 +295,7 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec get_object_acl(bucket :: binary, object :: binary) :: HTTPResponse.t
       def get_object_acl(bucket, object) do
-        request_query :get, bucket, [], "", object <> "?acl"
+        request_query :get, bucket, [], "", concat_uri_fragments(object, build_query_params([{"acl", ""}]))
       end
 
       ###################
@@ -317,7 +317,8 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec get_object_metadata(bucket :: binary, object :: binary, [{binary, binary}]) :: HTTPResponse.t
       def get_object_metadata(bucket, object, query_params) do
-        request_query :head, bucket, [], "", object <> "?" <> parse_query_params(query_params, "")
+        request_query :head, bucket, [], "",
+          concat_uri_fragments(object, build_query_params(query_params))
       end
 
       ##################
@@ -362,7 +363,7 @@ defmodule GCloudex.CloudStorage.Impl do
       """
       @spec set_object_acl(bucket :: binary, object :: binary, acl_config :: binary) :: HTTPResponse.t
       def set_object_acl(bucket, object, acl_config) do
-        request_query :put, bucket, [], acl_config, object <> "?acl"
+        request_query :put, bucket, [], acl_config, concat_uri_fragments(object, build_query_params([{"acl", ""}]))
       end
 
       @doc"""
@@ -374,17 +375,19 @@ defmodule GCloudex.CloudStorage.Impl do
       @spec set_object_acl(bucket :: binary, object :: binary, acl_config :: binary, [{binary, binary}]) :: HTTPResponse.t
       def set_object_acl(bucket, object, acl_config, query_params) do
         request_query :put, bucket, [], acl_config,
-          object <> "?acl" <> "&" <> parse_query_params(query_params, "")
+          concat_uri_fragments(object, build_query_params([{"acl", ""}] ++ query_params))
       end
 
       ########################
       ### HELPER FUNCTIONS ###
       ########################
 
-      defp parse_query_params([], query), do: query <> ""
-      defp parse_query_params([{param, val} = _head | []], query), do: query <> param <> "=" <> URI.encode_www_form(val)
-      defp parse_query_params([{param, val} = _head | tail], query) do
-        parse_query_params tail, query <> param <> "=" <> URI.encode_www_form(val) <> "&"
+      defp build_query_params(params) do
+        Enum.into(params, %{}) |> URI.encode_query
+      end
+
+      defp concat_uri_fragments(object, params) do
+        URI.encode_www_form(object) <> "?" <> params
       end
     end
   end
