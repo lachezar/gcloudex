@@ -7,7 +7,7 @@ defmodule GCloudex.CloudStorage.Request do
   Offers HTTP requests to be used in by the Google Cloud Storage wrapper.
   """
 
-  defmacro __using__(_opts) do 
+  defmacro __using__(_opts) do
     quote do
 
       @endpoint "https://www.googleapis.com/storage/v1/b/"
@@ -51,10 +51,8 @@ defmodule GCloudex.CloudStorage.Request do
       """
       @spec request_query(atom, binary, list(tuple), binary, binary) :: HTTPResponse.t
       def request_query(verb, bucket, headers \\ [], body \\ "", parameters) do
-        parameters = URI.encode_www_form(parameters)
         HTTP.request(
           verb,
-          # bucket <> "." <> @endpoint <> "/" <> parameters,
           @endpoint <> bucket <> "/o/" <> parameters,
           body,
           headers ++ [{"Authorization",
@@ -64,9 +62,9 @@ defmodule GCloudex.CloudStorage.Request do
       end
 
       defoverridable [
-        request_service: 0, 
+        request_service: 0,
         request: 3,
-        request: 4, 
+        request: 4,
         request_query: 5
       ]
     end
