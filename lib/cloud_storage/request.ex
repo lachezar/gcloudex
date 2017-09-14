@@ -12,7 +12,7 @@ defmodule GCloudex.CloudStorage.Request do
 
       @endpoint "https://www.googleapis.com/storage/v1/b/"
       @upload_endpoint "https://www.googleapis.com/upload/storage/v1/b/"
-      @project_id GCloudex.get_project_id
+      def project_id, do: GCloudex.get_project_id
 
       @doc"""
       Sends an HTTP request according to the Service resource in the Google Cloud
@@ -25,7 +25,7 @@ defmodule GCloudex.CloudStorage.Request do
           @endpoint,
           "",
           [
-            {"x-goog-project-id", @project_id},
+            {"x-goog-project-id", project_id()},
             {"Authorization", "Bearer #{Auth.get_token_storage(:full_control)}"}
           ],
           []
