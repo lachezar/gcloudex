@@ -1,8 +1,8 @@
-defmodule Test.Dummy.CloudStorage do 
+defmodule Test.Dummy.CloudStorage do
   use ExUnit.Case
   use GCloudex.CloudStorage.Impl, :cloud_storage
 
-  @endpoint "storage.googleapis.com"
+  @endpoint "https://www.googleapis.com/storage/v1/b"
   @project_id GCloudex.get_project_id
 
   def request_service do
@@ -10,7 +10,7 @@ defmodule Test.Dummy.CloudStorage do
       verb: :get,
       host: @endpoint,
       body: "",
-      headers: 
+      headers:
         [
           {"x-goog-project-id", @project_id},
           {"Authorization", "Bearer Dummy Token"}
@@ -22,29 +22,29 @@ defmodule Test.Dummy.CloudStorage do
   def request(verb, bucket, headers \\ [], body \\ "") do
     %{
       verb: verb,
-      host: bucket <> "." <> @endpoint,
+      host: @endpoint,
       body: body,
-      headers: 
-        headers ++ 
+      headers:
+        headers ++
         [
           {"Authorization", "Bearer Dummy Token"}
         ],
-      opts: []        
+      opts: []
     }
   end
 
-  def request_query(verb, bucket, headers \\ [], body \\ "", parameters) do
+  def request_query(verb, bucket, headers \\ [], body \\ "", parameters, endpoint \\ @endpoint) do
     %{
       verb: verb,
-      host: bucket <> "." <> @endpoint <> "/" <> parameters,
+      host: endpoint <> parameters,
       body: body,
-      headers: 
-        headers ++ 
+      headers:
+        headers ++
         [
           {"Authorization", "Bearer Dummy Token"}
         ],
-      opts: []        
-    }    
+      opts: []
+    }
   end
 end
 
@@ -52,14 +52,14 @@ defmodule CloudStorageTest do
   use ExUnit.Case, async: true
   alias Test.Dummy.CloudStorage, as: API
 
-  @endpoint "storage.googleapis.com"
+  @endpoint "https://www.googleapis.com/storage/v1/b"
   @project_id GCloudex.get_project_id
 
   #########################
   ### GET Service Tests ###
   #########################
 
-  test "list_buckets" do 
+  test "list_buckets" do
     expected = build_expected(:get, @endpoint, [{"x-goog-project-id", @project_id}], "")
 
     assert expected == API.list_buckets
@@ -69,8 +69,8 @@ defmodule CloudStorageTest do
   ### DELETE Bucket Tests ###
   ###########################
 
-  test "delete_bucket" do 
-    expected = build_expected(:delete, "bucket.#{@endpoint}", [], "")
+  test "delete_bucket" do
+    expected = build_expected(:delete, "#{@endpoint}", [], "")
 
     assert expected == API.delete_bucket "bucket"
   end
@@ -80,15 +80,15 @@ defmodule CloudStorageTest do
   ########################
 
   test "list_objects" do
-    expected = build_expected(:get, "bucket.#{@endpoint}", [], "")
+    expected = build_expected(:get, "#{@endpoint}", [], "")
 
     assert expected == API.list_objects "bucket"
   end
 
-  test "list_objects with query from non-empty list" do 
+  test "list_objects with query from non-empty list" do
     expected = build_expected(
       :get,
-      "bucket.#{@endpoint}/?key1=abc&key2=def",
+      "#{@endpoint}/?key1=abc&key2=def",
       [],
       ""
     )
@@ -96,10 +96,10 @@ defmodule CloudStorageTest do
     assert expected == API.list_objects "bucket", [{"key1", "abc"}, {"key2", "def"}]
   end
 
-  test "list list_objects with query from empty list" do 
+  test "list list_objects with query from empty list" do
     expected = build_expected(
       :get,
-      "bucket.#{@endpoint}/?",
+      "#{@endpoint}/?",
       [],
       ""
     )
@@ -107,75 +107,75 @@ defmodule CloudStorageTest do
     assert expected == API.list_objects "bucket", []
   end
 
-  test "get_bucket_acl" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?acl", [], "")
+  test "get_bucket_acl" do
+    expected = build_expected(:get, "#{@endpoint}/?acl", [], "")
 
     assert expected == API.get_bucket_acl "bucket"
   end
 
-  test "get_bucket_cors" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?cors", [], "")
+  test "get_bucket_cors" do
+    expected = build_expected(:get, "#{@endpoint}/?cors", [], "")
 
-    assert expected == API.get_bucket_cors "bucket"    
+    assert expected == API.get_bucket_cors "bucket"
   end
 
-  test "get_bucket_lifecycle" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?lifecycle", [], "")
+  test "get_bucket_lifecycle" do
+    expected = build_expected(:get, "#{@endpoint}/?lifecycle", [], "")
 
-    assert expected == API.get_bucket_lifecycle "bucket"        
+    assert expected == API.get_bucket_lifecycle "bucket"
   end
 
-  test "get_bucket_region" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?location", [], "")
+  test "get_bucket_region" do
+    expected = build_expected(:get, "#{@endpoint}/?location", [], "")
 
-    assert expected == API.get_bucket_region "bucket"        
-  end  
+    assert expected == API.get_bucket_region "bucket"
+  end
 
-  test "get_bucket_logging" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?logging", [], "")
+  test "get_bucket_logging" do
+    expected = build_expected(:get, "#{@endpoint}/?logging", [], "")
 
-    assert expected == API.get_bucket_logging "bucket"        
-  end    
+    assert expected == API.get_bucket_logging "bucket"
+  end
 
-  test "get_bucket_class" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?storageClass", [], "")
+  test "get_bucket_class" do
+    expected = build_expected(:get, "#{@endpoint}/?storageClass", [], "")
 
-    assert expected == API.get_bucket_class "bucket"        
-  end      
+    assert expected == API.get_bucket_class "bucket"
+  end
 
-  test "get_bucket_versioning" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?versioning", [], "")
+  test "get_bucket_versioning" do
+    expected = build_expected(:get, "#{@endpoint}/?versioning", [], "")
 
-    assert expected == API.get_bucket_versioning "bucket"        
-  end        
+    assert expected == API.get_bucket_versioning "bucket"
+  end
 
-  test "get_bucket_website" do 
-    expected = build_expected(:get, "bucket.#{@endpoint}/?website", [], "")
+  test "get_bucket_website" do
+    expected = build_expected(:get, "#{@endpoint}/?website", [], "")
 
-    assert expected == API.get_bucket_website "bucket"        
-  end   
+    assert expected == API.get_bucket_website "bucket"
+  end
 
   #########################
   ### HEAD Bucket Tests ###
   #########################
 
-  test "exists_bucket" do 
-    expected = build_expected(:head, "bucket.#{@endpoint}", [], "")
+  test "exists_bucket" do
+    expected = build_expected(:head, "#{@endpoint}", [], "")
 
     assert expected == API.exists_bucket "bucket"
-  end       
+  end
 
   ########################
   ### PUT Bucket Tests ###
   ########################
 
-  test "create_bucket/1 (default class and region)" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}", [{"x-goog-project-id", @project_id}], "")
+  test "create_bucket/1 (default class and region)" do
+    expected = build_expected(:put, "#{@endpoint}", [{"x-goog-project-id", @project_id}], "")
 
     assert expected == API.create_bucket "bucket"
   end
 
-  test "create_bucket/2 (default class and custom region)" do 
+  test "create_bucket/2 (default class and custom region)" do
     region = "region"
     body   =
       """
@@ -183,12 +183,12 @@ defmodule CloudStorageTest do
         <LocationConstraint>#{region}</LocationConstraint>
       </CreateBucketConfiguration>
       """
-    expected = build_expected(:put, "bucket.#{@endpoint}", [{"x-goog-project-id", @project_id}], body)
+    expected = build_expected(:put, "#{@endpoint}", [{"x-goog-project-id", @project_id}], body)
 
-    assert expected == API.create_bucket "bucket", region    
+    assert expected == API.create_bucket "bucket", region
   end
 
-  test "create_bucket/3 (custom class and custom region)" do 
+  test "create_bucket/3 (custom class and custom region)" do
     region = "region"
     class  = "class"
     body   =
@@ -198,91 +198,91 @@ defmodule CloudStorageTest do
         <StorageClass>#{class}</StorageClass>
       </CreateBucketConfiguration>
       """
-    expected = build_expected(:put, "bucket.#{@endpoint}", [{"x-goog-project-id", @project_id}], body)
+    expected = build_expected(:put, "#{@endpoint}", [{"x-goog-project-id", @project_id}], body)
 
-    assert expected == API.create_bucket "bucket", region, class    
-  end  
+    assert expected == API.create_bucket "bucket", region, class
+  end
 
-  test "set_bucket_acl" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?acl", [], "acl_config")
+  test "set_bucket_acl" do
+    expected = build_expected(:put, "#{@endpoint}/?acl", [], "acl_config")
 
     assert expected == API.set_bucket_acl "bucket", "acl_config"
   end
 
-  test "set_bucket_cors" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?cors", [], "cors_config")
+  test "set_bucket_cors" do
+    expected = build_expected(:put, "#{@endpoint}/?cors", [], "cors_config")
 
-    assert expected == API.set_bucket_cors "bucket", "cors_config"    
+    assert expected == API.set_bucket_cors "bucket", "cors_config"
   end
 
-  test "set_bucket_lifecycle" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?lifecycle", [], "lifecycle_config")
+  test "set_bucket_lifecycle" do
+    expected = build_expected(:put, "#{@endpoint}/?lifecycle", [], "lifecycle_config")
 
-    assert expected == API.set_bucket_lifecycle "bucket", "lifecycle_config"        
+    assert expected == API.set_bucket_lifecycle "bucket", "lifecycle_config"
   end
 
-  test "set_bucket_logging" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?logging", [], "logging_config")
+  test "set_bucket_logging" do
+    expected = build_expected(:put, "#{@endpoint}/?logging", [], "logging_config")
 
-    assert expected == API.set_bucket_logging "bucket", "logging_config"        
-  end  
+    assert expected == API.set_bucket_logging "bucket", "logging_config"
+  end
 
-  test "set_bucket_versioning" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?versioning", [], "versioning_config")
+  test "set_bucket_versioning" do
+    expected = build_expected(:put, "#{@endpoint}/?versioning", [], "versioning_config")
 
-    assert expected == API.set_bucket_versioning "bucket", "versioning_config"        
-  end    
+    assert expected == API.set_bucket_versioning "bucket", "versioning_config"
+  end
 
-  test "set_bucket_website" do 
-    expected = build_expected(:put, "bucket.#{@endpoint}/?websiteConfig", [], "website_config")
+  test "set_bucket_website" do
+    expected = build_expected(:put, "#{@endpoint}/?websiteConfig", [], "website_config")
 
-    assert expected == API.set_bucket_website "bucket", "website_config"        
-  end     
+    assert expected == API.set_bucket_website "bucket", "website_config"
+  end
 
   #####################
   ### DELETE Object ###
   #####################
 
-  test "delete_object/2 (no query)" do 
+  test "delete_object/2 (no query)" do
     object   = "object"
-    expected = build_expected(:delete, "bucket.#{@endpoint}/#{object}", [], "")
+    expected = build_expected(:delete, "#{@endpoint}/#{object}", [], "")
 
     assert expected == API.delete_object "bucket", object
   end
 
-  test "delete_object/3 (with query)" do 
+  test "delete_object/3 (with query)" do
     query    = "key1=abc&key2=def"
     object   = "object"
-    expected = build_expected(:delete, "bucket.#{@endpoint}/#{object}?#{query}", [], "")
+    expected = build_expected(:delete, "#{@endpoint}/#{object}?#{query}", [], "")
 
     assert expected == API.delete_object "bucket", object, [{"key1", "abc"}, {"key2", "def"}]
-  end  
+  end
 
   ##################
   ### GET Object ###
   ##################
 
-  test "get_object/2 (no query)" do 
+  test "get_object/2 (no query)" do
     object   = "object"
     bucket   = "bucket"
-    expected = build_expected(:get, "#{bucket}.#{@endpoint}/#{object}", [], "")
+    expected = build_expected(:get, "#{@endpoint}/#{object}?", [], "")
 
     assert expected == API.get_object bucket, object
   end
 
-  test "get_object/3 (with query)" do 
+  test "get_object/3 (with query)" do
     object   = "object"
     bucket   = "bucket"
     query    = "key1=abc&key2=def"
-    expected = build_expected(:get, "#{bucket}.#{@endpoint}/#{object}?#{query}", [], "")
+    expected = build_expected(:get, "#{@endpoint}/#{object}?#{query}", [], "")
 
     assert expected == API.get_object bucket, object, [{"key1", "abc"}, {"key2", "def"}]
-  end  
+  end
 
-  test "get_object_acl" do 
+  test "get_object_acl" do
     bucket   = "bucket"
     object   = "object"
-    expected = build_expected(:get, "#{bucket}.#{@endpoint}/#{object}?acl", [], "")
+    expected = build_expected(:get, "#{@endpoint}/#{object}?acl=", [], "")
 
     assert expected == API.get_object_acl bucket, object
   end
@@ -291,53 +291,51 @@ defmodule CloudStorageTest do
   ### HEAD Object ###
   ###################
 
-  test "get_object_metadata/2 (no query)" do 
+  test "get_object_metadata/2 (no query)" do
     bucket   = "bucket"
     object   = "object"
-    expected = build_expected(:head, "#{bucket}.#{@endpoint}/#{object}", [], "")
+    expected = build_expected(:head, "#{@endpoint}/#{object}?", [], "")
 
     assert expected == API.get_object_metadata bucket, object
   end
 
-  test "get_object_metadata/3 (with query)" do 
+  test "get_object_metadata/3 (with query)" do
     bucket   = "bucket"
     object   = "object"
     query    = "key1=abc&key2=def"
-    expected = build_expected(:head, "#{bucket}.#{@endpoint}/#{object}?#{query}", [], "")
+    expected = build_expected(:head, "#{@endpoint}/#{object}?#{query}", [], "")
 
     assert expected == API.get_object_metadata bucket, object, [{"key1", "abc"}, {"key2", "def"}]
-  end  
+  end
 
   ##################
   ### PUT Object ###
   ##################
 
-  test "put_object/2 (no path for the file)" do
-    filepath = __DIR__ <> "README.md" 
-    body     = {:file, filepath}
-    bucket   = "bucket"
-    expected = build_expected(:put, "#{bucket}.#{@endpoint}/#{filepath}", [], body)
+  test "put_object/4 (with path for the file)" do
+    filepath   = __DIR__ <> "README.md"
+    bucketpath = "folder_1/folder_2"
+    body       = {
+      :multipart,
+      [
+        {"name", "", [{"Content-Type", "application/json"}]},
+        {:file, filepath, {"form-data", []},
+          [{"Content-Type", "application/octet-stream"}]
+        }
+      ]}
+    bucket     = "bucket"
+    expected   = build_expected(:post, "https://www.googleapis.com/upload/storage/v1/b/?name=folder_1%2Ffolder_2&uploadType=multipart", [], body)
 
-    assert expected == API.put_object bucket, filepath
+    assert expected == API.put_object bucket, filepath, bucketpath, "application/octet-stream"
   end
 
-  test "put_object/3 (with path for the file)" do
-    filepath   = __DIR__ <> "README.md" 
-    bucketpath = "folder_1/folder_2"
-    body       = {:file, filepath}
-    bucket     = "bucket"
-    expected   = build_expected(:put, "#{bucket}.#{@endpoint}/#{bucketpath}", [], body)
-
-    assert expected == API.put_object bucket, filepath, bucketpath
-  end  
-
-  test "copy_object" do 
+  test "copy_object" do
     new_bucket    = "new_bucket"
     new_object    = "new_object"
     source_object = "source_object"
     expected      = build_expected(
-      :put, 
-      "#{new_bucket}.#{@endpoint}/#{new_object}",
+      :put,
+      "#{@endpoint}/#{new_object}",
       [{"x-goog-copy-source", source_object}],
       ""
     )
@@ -345,13 +343,13 @@ defmodule CloudStorageTest do
     assert expected == API.copy_object new_bucket, new_object, source_object
   end
 
-  test "set_object_acl/3 (no query)" do 
+  test "set_object_acl/3 (no query)" do
     bucket     = "bucket"
     object     = "object"
     acl_config = "acl_config"
     expected   = build_expected(
       :put,
-      "#{bucket}.#{@endpoint}/#{object}?acl",
+      "#{@endpoint}/#{object}?acl=",
       [],
       acl_config
     )
@@ -359,20 +357,20 @@ defmodule CloudStorageTest do
     assert expected == API.set_object_acl bucket, object, acl_config
   end
 
-  test "set_object_acl/4 (with query)" do 
+  test "set_object_acl/4 (with query)" do
     bucket     = "bucket"
     object     = "object"
     acl_config = "acl_config"
     query      = "key1=abc&key2=def"
     expected   = build_expected(
       :put,
-      "#{bucket}.#{@endpoint}/#{object}?acl&#{query}",
+      "#{@endpoint}/#{object}?acl=&#{query}",
       [],
       acl_config
     )
 
     assert expected == API.set_object_acl bucket, object, acl_config, [{"key1", "abc"}, {"key2", "def"}]
-  end  
+  end
 
   ###############
   ### Helpers ###
@@ -380,18 +378,18 @@ defmodule CloudStorageTest do
 
   defp build_expected(verb, host, headers, body, parameters \\ :empty) do
     map = %{
-      verb: verb, 
-      host: host, 
-      headers: 
-        headers ++         
+      verb: verb,
+      host: host,
+      headers:
+        headers ++
         [{"Authorization", "Bearer Dummy Token"}],
       body: body,
       opts: []
     }
 
-    
-    if parameters != :empty do 
-      Map.put(map, host, host <> "/" <> parameters)
+
+    if parameters != :empty do
+      Map.put(map, host, host <> parameters)
     else
       map
     end

@@ -67,7 +67,7 @@ defmodule GCloudex.CloudStorage.Request do
         request_service: 0,
         request: 3,
         request: 4,
-        request_query: 5
+        request_query: 6
       ]
     end
   end
