@@ -1,6 +1,5 @@
 defmodule GCloudex.CloudSQL.Request do
   alias HTTPoison, as: HTTP
-  alias HTTPoison.HTTPResponse
   alias GCloudex.Auth, as: Auth
 
   @moduledoc """
@@ -8,25 +7,32 @@ defmodule GCloudex.CloudSQL.Request do
   """
 
   defmacro __using__(_opts) do
-    quote do
-
-      def project_id, do: GCloudex.get_project_id
+    quote location: :keep do
+      def project_id, do: GCloudex.get_project_id()
 
       @doc """
       Sends a HTTP request with the given 'verb', 'headers' and 'body' to the
       specified 'endpoint'. The authorization and google project headers are
       added automatically.
       """
-      @spec request(verb :: atom, endpoint :: binary, headers :: [{key :: binary, value :: binary}], body :: binary) :: HTTPResponse.t
+      @spec request(
+              verb :: atom,
+              endpoint :: binary,
+              headers :: [{key :: binary, value :: binary}],
+              body :: binary
+            ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
       def request(verb, endpoint, headers \\ [], body \\ "") do
         HTTP.request(
           verb,
           endpoint,
           body,
-          headers ++ [{"x-goog-project-id", project_id()},
-                      {"Authorization", "Bearer #{Auth.get_token_storage(:sql_admin)}"}],
+          headers ++
+            [
+              {"x-goog-project-id", project_id()},
+              {"Authorization", "Bearer #{Auth.get_token_storage(:sql_admin)}"}
+            ],
           []
-          )
+        )
       end
 
       @doc """
@@ -34,23 +40,30 @@ defmodule GCloudex.CloudSQL.Request do
       'parameters' to the specified 'endpoint'. The authorization and google
       project headers are added automatically.
       """
-      @spec request_query(verb :: atom, endpoint :: binary, headers :: [{key :: binary, value :: binary}], body :: binary, parameters :: binary) :: HTTPResponse.t
+      @spec request_query(
+              verb :: atom,
+              endpoint :: binary,
+              headers :: [{key :: binary, value :: binary}],
+              body :: binary,
+              parameters :: binary
+            ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
       def request_query(verb, endpoint, headers \\ [], body \\ "", parameters) do
         HTTP.request(
           verb,
           endpoint <> "/" <> parameters,
           body,
-          headers ++ [{"x-goog-project-id", project_id()},
-                      {"Authorization", "Bearer #{Auth.get_token_storage(:sql_admin)}"}],
+          headers ++
+            [
+              {"x-goog-project-id", project_id()},
+              {"Authorization", "Bearer #{Auth.get_token_storage(:sql_admin)}"}
+            ],
           []
-          )
+        )
       end
 
-      defoverridable [
-        request: 3,
-        request: 4,
-        request_query: 5
-      ]
+      defoverridable request: 3,
+                     request: 4,
+                     request_query: 5
     end
   end
 end

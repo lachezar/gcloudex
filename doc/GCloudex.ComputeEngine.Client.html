@@ -800,7 +800,7 @@ optional</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">add_access_config(zone :: binary, instance :: binary, network_interface :: binary, name :: binary, nat_ip :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">add_access_config(zone :: binary, instance :: binary, network_interface :: binary, name :: binary, nat_ip :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -825,7 +825,7 @@ values.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">add_instances_to_group(zone :: binary, instance_group :: binary, instances :: [binary], fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">add_instances_to_group(zone :: binary, instance_group :: binary, instances :: [binary], fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -849,7 +849,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_autoscalers(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_autoscalers(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -873,7 +873,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_disk_types(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_disk_types(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -897,7 +897,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_disks(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_disks(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -921,7 +921,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_instance_groups(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_instance_groups(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -944,7 +944,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_instances(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_instances(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -968,7 +968,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">aggregated_list_of_machine_types(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">aggregated_list_of_machine_types(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -992,7 +992,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">attach_disk(zone :: binary, instance :: binary, disk_resource :: map, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">attach_disk(zone :: binary, instance :: binary, disk_resource :: map, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1037,7 +1037,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">create_snapshot(zone :: binary, disk :: binary, request :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">create_snapshot(zone :: binary, disk :: binary, request :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1063,7 +1063,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_access_config(zone :: binary, instance :: binary, access_config :: binary, network_interface :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_access_config(zone :: binary, instance :: binary, access_config :: binary, network_interface :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1087,7 +1087,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_autoscaler(zone :: binary, autoscaler :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_autoscaler(zone :: binary, autoscaler :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1110,7 +1110,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_disk(zone :: binary, disk :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_disk(zone :: binary, disk :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1133,7 +1133,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_firewall(firewall :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_firewall(firewall :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1156,7 +1156,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_image(image :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_image(image :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1179,7 +1179,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_instance(zone :: binary, instance :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_instance(zone :: binary, instance :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1202,7 +1202,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_instance_group(zone :: binary, instance_group :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_instance_group(zone :: binary, instance_group :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1225,7 +1225,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">delete_network(network :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">delete_network(network :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1248,7 +1248,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">deprecate_image(image :: binary, request_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">deprecate_image(image :: binary, request_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1272,7 +1272,7 @@ refex ‘(?:<a href="?:[-a-z0-9]%7B0,61%7D[a-z0-9]">a-z</a>?)’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">detach_disk(zone :: binary, instance :: binary, device_name :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">detach_disk(zone :: binary, instance :: binary, device_name :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1296,7 +1296,7 @@ given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_autoscaler(zone :: binary, autoscaler :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_autoscaler(zone :: binary, autoscaler :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1319,7 +1319,7 @@ given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_disk(zone :: binary, disk :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_disk(zone :: binary, disk :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1343,7 +1343,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_disk_type(zone :: binary, disk_type :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_disk_type(zone :: binary, disk_type :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1366,7 +1366,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_firewall(firewall :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_firewall(firewall :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1389,7 +1389,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_image(image :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_image(image :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1412,7 +1412,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_instance(zone :: binary, instance :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_instance(zone :: binary, instance :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1435,7 +1435,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_instance_group(zone :: binary, instance_group :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_instance_group(zone :: binary, instance_group :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1458,7 +1458,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_license(binary, binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_license(binary, binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1481,7 +1481,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_machine_type(zone :: binary, machine_type :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_machine_type(zone :: binary, machine_type :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1504,7 +1504,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_network(network :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_network(network :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1527,7 +1527,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_region(region :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_region(region :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1550,7 +1550,7 @@ HTTP reply contains a Disk Resource in the body.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_serial_port_output(zone :: binary, instance :: binary, port :: 1..4, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_serial_port_output(zone :: binary, instance :: binary, port :: 1..4, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1575,7 +1575,7 @@ inclusive.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">get_zone(zone :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">get_zone(zone :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1599,7 +1599,7 @@ inclusive.</p>
       <div class="specs-list">
         
           <pre><code class="elixir">insert_autoscaler(zone :: binary, autoscaler_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) ::
-  HTTPResponse.t |
+  {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()} |
   no_return</code></pre>
         
       </div>
@@ -1626,7 +1626,7 @@ inclusive.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_disk(zone :: binary, disk_resource :: map, source_image :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_disk(zone :: binary, disk_resource :: map, source_image :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1654,7 +1654,7 @@ larger than the default size by specifying the sizeGb property in the
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_firewall(firewall_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_firewall(firewall_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1679,7 +1679,7 @@ information about the structure and properties of Firewall Resources check
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_image(name :: binary, source_url :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_image(name :: binary, source_url :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1705,7 +1705,7 @@ Image Resources can be passed.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_image_with_resource(image_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_image_with_resource(image_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1728,7 +1728,7 @@ Image Resources can be passed.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_instance(zone :: binary, instance_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_instance(zone :: binary, instance_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1784,7 +1784,7 @@ minimal Instance Resource the API will accept:</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">insert_instance_group(zone :: binary, instance_group_resource :: map, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">insert_instance_group(zone :: binary, instance_group_resource :: map, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1811,7 +1811,7 @@ the Instance Group Resources check
       <div class="specs-list">
         
           <pre><code class="elixir">insert_network(network_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) ::
-  HTTPResponse.t |
+  {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()} |
   no_return</code></pre>
         
       </div>
@@ -1837,7 +1837,7 @@ about the structure and properties of the Network Resource check
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_autoscalers(zone :: binary, query_params :: map) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_autoscalers(zone :: binary, query_params :: map) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1861,7 +1861,7 @@ according to the ‘query_params’ if provided.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_disk_types(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_disk_types(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1885,7 +1885,7 @@ to the given ‘query_params’ if provided.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_disks(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_disks(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1909,7 +1909,7 @@ according to the given ‘query_params’ if provided.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_firewalls(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_firewalls(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1933,7 +1933,7 @@ provided.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_images(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_images(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1956,7 +1956,7 @@ provided.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_instance_groups(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_instance_groups(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -1980,7 +1980,7 @@ specified ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_instances(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_instances(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2004,7 +2004,7 @@ present.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_instances_in_group(zone :: binary, instance_group :: binary, instance_state :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_instances_in_group(zone :: binary, instance_group :: binary, instance_state :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2029,7 +2029,7 @@ through ‘instance_state’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_machine_types(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_machine_types(zone :: binary, query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2053,7 +2053,7 @@ that fit in the given ‘query_params’ if present.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_networks(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_networks(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2077,7 +2077,7 @@ that fit in the given ‘query_params’ if present.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_regions(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_regions(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2100,7 +2100,7 @@ that fit in the given ‘query_params’ if present.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">list_zones(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">list_zones(query_params :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2124,7 +2124,7 @@ that fit in the given ‘query_params’ if present.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">patch_autoscaler(zone :: binary, autoscaler_name :: binary, autoscaler_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">patch_autoscaler(zone :: binary, autoscaler_name :: binary, autoscaler_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2148,7 +2148,7 @@ the ‘autoscaler_resource’. This function supports patch semantics.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">patch_firewall(firewall :: binary, firewall_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">patch_firewall(firewall :: binary, firewall_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2172,7 +2172,7 @@ the ‘autoscaler_resource’. This function supports patch semantics.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">remove_instances_from_group(zone :: binary, insance_group :: binary, instances :: [binary], fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">remove_instances_from_group(zone :: binary, insance_group :: binary, instances :: [binary], fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2196,7 +2196,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">request(verb :: atom, endpoint :: binary, headers :: [{binary, binary}], body :: binary, parameters :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">request(verb :: atom, endpoint :: binary, headers :: [{binary, binary}], body :: binary, parameters :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2218,7 +2218,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">reset_instance(zone :: binary, instance :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">reset_instance(zone :: binary, instance :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2241,7 +2241,7 @@ the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">resize_disk(zone :: binary, disk :: binary, size_gb :: pos_integer, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">resize_disk(zone :: binary, disk :: binary, size_gb :: pos_integer, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2265,7 +2265,7 @@ the provided ‘size_gb’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_disk_auto_delete(zone :: binary, instance :: binary, auto_delete :: boolean, device_name :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_disk_auto_delete(zone :: binary, instance :: binary, auto_delete :: boolean, device_name :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2289,7 +2289,7 @@ the provided ‘size_gb’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_machine_type(zone :: binary, instance :: binary, machine_type :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_machine_type(zone :: binary, instance :: binary, machine_type :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2313,7 +2313,7 @@ the provided ‘size_gb’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_metadata(zone :: binary, instance :: binary, fingerprint :: binary, items :: [map], fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_metadata(zone :: binary, instance :: binary, fingerprint :: binary, items :: [map], fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2348,7 +2348,7 @@ the provided ‘size_gb’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_named_ports_for_group(zone :: binary, instance_group :: binary, ports :: [{name :: binary, port :: binary}], fingerprint :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_named_ports_for_group(zone :: binary, instance_group :: binary, ports :: [{name :: binary, port :: binary}], fingerprint :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2373,7 +2373,7 @@ given ‘zone’. The ‘ports’ must be passed as a list of tuples with the fo
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_scheduling(zone :: binary, instance :: binary, {on_host_maintenance :: binary, automatic_restart :: boolean, preemptible :: boolean}, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_scheduling(zone :: binary, instance :: binary, {on_host_maintenance :: binary, automatic_restart :: boolean, preemptible :: boolean}, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2397,7 +2397,7 @@ given ‘zone’. The ‘ports’ must be passed as a list of tuples with the fo
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">set_tags(zone :: binary, instance :: binary, fingerprint :: binary, items :: [binary], fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">set_tags(zone :: binary, instance :: binary, fingerprint :: binary, items :: [binary], fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2421,7 +2421,7 @@ The ‘instance’ must exist in the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">start_instance(zone :: binary, instance :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">start_instance(zone :: binary, instance :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2444,7 +2444,7 @@ The ‘instance’ must exist in the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">stop_instance(zone :: binary, instance :: binary, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">stop_instance(zone :: binary, instance :: binary, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2467,7 +2467,7 @@ The ‘instance’ must exist in the given ‘zone’.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">update_autoscaler(zone :: binary, autoscaler_name :: binary, autoscaler_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">update_autoscaler(zone :: binary, autoscaler_name :: binary, autoscaler_resource :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
@@ -2492,7 +2492,7 @@ optional.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">update_firewall(firewall :: binary, firewall_resource :: map, fields :: binary) :: HTTPResponse.t</code></pre>
+          <pre><code class="elixir">update_firewall(firewall :: binary, firewall_resource :: map, fields :: binary) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}</code></pre>
         
       </div>
     </div>
