@@ -2,6 +2,8 @@ defmodule GCloudex.CloudStorage.Client do
   alias HTTPoison, as: HTTP
   alias GCloudex.Auth, as: Auth
 
+  @type params :: params() | Keyword.t() 
+
   def project do
     GCloudex.get_project_id()
   end
@@ -49,7 +51,7 @@ defmodule GCloudex.CloudStorage.Client do
   given 'query_params'. The query parameters must be passed as a list of tuples
   [{param_1, value_1}, {param_2, value_2}].
   """
-  @spec list_objects(bucket :: String.t(), query_params :: [{String.t(), String.t()}]) ::
+  @spec list_objects(bucket :: String.t(), query_params :: params()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_objects(bucket, query_params) do
     request_query(:get, bucket, [], "", "?" <> build_query_params(query_params))
@@ -277,7 +279,7 @@ defmodule GCloudex.CloudStorage.Client do
   @spec delete_object(
           bucket :: String.t(),
           object :: String.t(),
-          query_params :: [{String.t(), String.t()}]
+          query_params :: params()
         ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def delete_object(bucket, object, query_params) do
     request_query(
@@ -312,7 +314,7 @@ defmodule GCloudex.CloudStorage.Client do
   @spec get_object(
           bucket :: String.t(),
           object :: String.t(),
-          query_params :: [{String.t(), String.t()}]
+          query_params :: params()
         ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def get_object(bucket, object, query_params) do
     request_query(
@@ -358,7 +360,7 @@ defmodule GCloudex.CloudStorage.Client do
   given 'query_params'. The query parameters must be passed as a list of tuples
   [{param_1, value_1}, {param_2, value_2}].
   """
-  @spec get_object_metadata(bucket :: String.t(), object :: String.t(), [{String.t(), String.t()}]) ::
+  @spec get_object_metadata(bucket :: String.t(), object :: String.t(), params()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def get_object_metadata(bucket, object, query_params) do
     request_query(
