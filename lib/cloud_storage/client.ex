@@ -2,7 +2,7 @@ defmodule GCloudex.CloudStorage.Client do
   alias HTTPoison, as: HTTP
   alias GCloudex.Auth, as: Auth
 
-  @type params :: params() | Keyword.t() 
+  @type params :: [{String.t(), String.t()}] | Keyword.t() 
 
   def project do
     GCloudex.get_project_id()
