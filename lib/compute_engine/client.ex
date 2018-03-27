@@ -40,7 +40,7 @@ defmodule GCloudex.ComputeEngine.Client do
   For the properties and structure of the 'autoscaler_resource' check
   https://cloud.google.com/compute/docs/reference/latest/autoscalers#resource
   """
-  @spec insert_autoscaler(zone :: binary, autoscaler_resource :: Map.t(), fields :: binary) ::
+  @spec insert_autoscaler(zone :: binary, autoscaler_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()} | no_return
   def insert_autoscaler(zone, autoscaler_resource, fields \\ "") do
     query = fields_binary_to_map(fields)
@@ -62,7 +62,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @spec patch_autoscaler(
           zone :: binary,
           autoscaler_name :: binary,
-          autoscaler_resource :: Map.t(),
+          autoscaler_resource :: map(),
           fields :: binary
         ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def patch_autoscaler(zone, autoscaler_name, autoscaler_resource, fields \\ "") do
@@ -92,7 +92,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @spec update_autoscaler(
           zone :: binary,
           autoscaler_name :: binary,
-          autoscaler_resource :: Map.t(),
+          autoscaler_resource :: map(),
           fields :: binary
         ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def update_autoscaler(zone, autoscaler_name \\ "", autoscaler_resource, fields \\ "") do
@@ -143,7 +143,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves an aggregated list of autoscalers according to the given
   'query_params' if provided.
   """
-  @spec aggregated_list_of_autoscalers(query_params :: Map.t()) ::
+  @spec aggregated_list_of_autoscalers(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_autoscalers(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -159,7 +159,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves a list of disk types available to the specified 'zone' according
   to the given 'query_params' if provided.
   """
-  @spec list_disk_types(zone :: binary, query_params :: Map.t()) ::
+  @spec list_disk_types(zone :: binary, query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_disk_types(zone, query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -182,7 +182,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves an aggregated list of Disk Types according to the
   'query_params' if provided.
   """
-  @spec aggregated_list_of_disk_types(query_params :: Map.t()) ::
+  @spec aggregated_list_of_disk_types(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_disk_types(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -198,7 +198,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves a list of persistent disks contained within the specified 'zone' and
   according to the given 'query_params' if provided.
   """
-  @spec list_disks(zone :: binary, query_params :: Map.t()) ::
+  @spec list_disks(zone :: binary, query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_disks(zone, query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -297,7 +297,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves an aggregated list of persistent disks according to the given
   'query_params' if they're provided.
   """
-  @spec aggregated_list_of_disks(query_params :: Map.t()) ::
+  @spec aggregated_list_of_disks(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_disks(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -311,7 +311,7 @@ defmodule GCloudex.ComputeEngine.Client do
   contain the keys "name" and "description" and "name" must obey the
   refex '(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)'.
   """
-  @spec create_snapshot(zone :: binary, disk :: binary, request :: Map.t(), fields :: binary) ::
+  @spec create_snapshot(zone :: binary, disk :: binary, request :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def create_snapshot(zone, disk, request, fields \\ "") when request != %{} do
     query = fields_binary_to_map(fields)
@@ -334,7 +334,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves the list of firewall rules according to the 'query_params' if
   provided.
   """
-  @spec list_firewalls(query_params :: Map.t()) ::
+  @spec list_firewalls(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_firewalls(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -358,7 +358,7 @@ defmodule GCloudex.ComputeEngine.Client do
   information about the structure and properties of Firewall Resources check
   https://cloud.google.com/compute/docs/reference/latest/firewalls#resource
   """
-  @spec insert_firewall(firewall_resource :: Map.t(), fields :: binary) ::
+  @spec insert_firewall(firewall_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def insert_firewall(firewall_resource, fields \\ "") when is_map(firewall_resource) do
     query = fields_binary_to_map(fields)
@@ -377,7 +377,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Updates the specified 'firewall' rule with the data included in the
   'firewall_resource'. This function supports patch semantics.
   """
-  @spec patch_firewall(firewall :: binary, firewall_resource :: Map.t(), fields :: binary) ::
+  @spec patch_firewall(firewall :: binary, firewall_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def patch_firewall(firewall, firewall_resource, fields \\ "")
       when is_map(firewall_resource) do
@@ -431,7 +431,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @doc """
   Retrieves the list of private images available (project scoped only).
   """
-  @spec list_images(query_params :: Map.t()) ::
+  @spec list_images(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_images(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -476,7 +476,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @doc """
   Creates an image with the provided 'image_resource'.
   """
-  @spec insert_image_with_resource(image_resource :: Map.t(), fields :: binary) ::
+  @spec insert_image_with_resource(image_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def insert_image_with_resource(image_resource, fields \\ "") when is_map(image_resource) do
     body = image_resource |> Poison.encode!()
@@ -544,7 +544,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Sets the deprecation status of an 'image' using the data provided in the
   'request_params'.
   """
-  @spec deprecate_image(image :: binary, request_params :: Map.t(), fields :: binary) ::
+  @spec deprecate_image(image :: binary, request_params :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def deprecate_image(image, request_params, fields \\ "") do
     body = request_params |> Poison.encode!()
@@ -573,7 +573,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves the list of instance groups that are located in the
   specified 'zone'.
   """
-  @spec list_instance_groups(zone :: binary, query_params :: Map.t()) ::
+  @spec list_instance_groups(zone :: binary, query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_instance_groups(zone, query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -590,7 +590,7 @@ defmodule GCloudex.ComputeEngine.Client do
           zone :: binary,
           instance_group :: binary,
           instance_state :: binary,
-          query_params :: Map.t()
+          query_params :: map()
         ) :: {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_instances_in_group(zone, instance_group, instance_state \\ "", query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -667,7 +667,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @doc """
   Retrieves the list of Instance Groups and sorts them by zone.
   """
-  @spec aggregated_list_of_instance_groups(query_params :: Map.t()) ::
+  @spec aggregated_list_of_instance_groups(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_instance_groups(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -780,7 +780,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Lists all instances in the given 'zone' obeying the given 'query_params' if
   present.
   """
-  @spec list_instances(zone :: binary, query_params :: Map.t()) ::
+  @spec list_instances(zone :: binary, query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_instances(zone, query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -843,7 +843,7 @@ defmodule GCloudex.ComputeEngine.Client do
 
     https://cloud.google.com/compute/docs/reference/latest/instances#resource
   """
-  @spec insert_instance(zone :: binary, instance_resource :: Map.t(), fields :: binary) ::
+  @spec insert_instance(zone :: binary, instance_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def insert_instance(zone, instance_resource, fields \\ "") do
     body = instance_resource |> Poison.encode!()
@@ -1028,7 +1028,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves aggregated list of instances according to the specified
   'query_params' if present.
   """
-  @spec aggregated_list_of_instances(query_params :: Map.t()) ::
+  @spec aggregated_list_of_instances(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_instances(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -1344,7 +1344,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves a list of machine types available in the specified 'zone' and
   that fit in the given 'query_params' if present.
   """
-  @spec list_machine_types(zone :: binary, query_params :: Map.t()) ::
+  @spec list_machine_types(zone :: binary, query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_machine_types(zone, query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -1372,7 +1372,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Returns an aggragated list of machine types following the specified
   'query_params' if present.
   """
-  @spec aggregated_list_of_machine_types(query_params :: Map.t()) ::
+  @spec aggregated_list_of_machine_types(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def aggregated_list_of_machine_types(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -1388,7 +1388,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves the list of networks available according to the given
   'query_params' if provided.
   """
-  @spec list_networks(query_params :: Map.t()) ::
+  @spec list_networks(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_networks(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -1412,7 +1412,7 @@ defmodule GCloudex.ComputeEngine.Client do
   about the structure and properties of the Network Resource check
   https://cloud.google.com/compute/docs/reference/latest/networks#resource.
   """
-  @spec insert_network(network_resource :: Map.t(), fields :: binary) ::
+  @spec insert_network(network_resource :: map(), fields :: binary) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()} | no_return
   def insert_network(network_resource, fields \\ "") when is_map(network_resource) do
     query = fields_binary_to_map(fields)
@@ -1445,7 +1445,7 @@ defmodule GCloudex.ComputeEngine.Client do
   @doc """
   Retrieves a list of region resources according to the given 'query_params'.
   """
-  @spec list_regions(query_params :: Map.t()) ::
+  @spec list_regions(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_regions(query_params \\ %{}) do
     query = query_params |> URI.encode_query()
@@ -1477,7 +1477,7 @@ defmodule GCloudex.ComputeEngine.Client do
   Retrieves the list of Zone resources available according to the given
   'query_params'.
   """
-  @spec list_zones(query_params :: Map.t()) ::
+  @spec list_zones(query_params :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def list_zones(query_params \\ %{}) do
     query = query_params |> URI.encode_query()

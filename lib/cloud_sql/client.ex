@@ -309,7 +309,7 @@ defmodule GCloudex.CloudSQL.Client do
   the description of Database Resources in:
     https://cloud.google.com/sql/docs/admin-api/v1beta4/databases#resource
   """
-  @spec patch_database(instance :: binary, database :: binary, db_resource :: Map.t()) ::
+  @spec patch_database(instance :: binary, database :: binary, db_resource :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def patch_database(instance, database, db_resource) do
     body = db_resource |> Poison.encode!()
@@ -327,7 +327,7 @@ defmodule GCloudex.CloudSQL.Client do
   Updates a resource containing information about a 'database' inside a
   Cloud SQL 'instance'. The 'update_map' must be a Map.
   """
-  @spec update_database(instance :: binary, database :: binary, db_resource :: Map.t()) ::
+  @spec update_database(instance :: binary, database :: binary, db_resource :: map()) ::
           {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   def update_database(instance, database, db_resource) do
     body = db_resource |> Poison.encode!()
