@@ -1,13 +1,13 @@
 defmodule GCloudex.Mixfile do
   use Mix.Project
 
-  @version "0.4.4"
+  @version "0.4.5"
 
   def project do
     [
      app: :gcloudex,
      version: @version,
-     elixir: "~> 1.4",
+     elixir: "~> 1.6",
      description: "Google Cloud for Elixir. Friendly set of wrappers for "
                    <> "Google Cloud Platform API's.",
      build_embedded: Mix.env == :prod,
@@ -21,7 +21,7 @@ defmodule GCloudex.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison, :goth]]
+    []
   end
 
   # Dependencies can be Hex packages:
